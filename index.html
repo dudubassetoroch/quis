@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Skate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Quiz de Skate</h2>
+        <div id="quiz"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "O skatista coloca os pés no shape do skate?", answer: "Sim" },
+            { question: "Os eixos do skate conectam as rodas ao shape?", answer: "Sim" },
+            { question: "Um “kickflip” é quando o skate gira 180° no ar?", answer: "Não" },
+            { question: "Tony Hawk é considerado um dos maiores skatistas de todos os tempos?", answer: "Sim" },
+            { question: "O skate longboard é o mais usado para manobras em rampas e skate parks?", answer: "Não" },
+            { question: "A lixa fica na parte de cima do skate?", answer: "Sim" },
+            { question: "O “ollie” é uma manobra em que o skatista pula com o skate sem usar as mãos?", answer: "Sim" },
+            { question: "Skate street é diferente do longboard principalmente por ser menor e mais leve?", answer: "Sim" },
+            { question: "O skate foi inventado nos Estados Unidos?", answer: "Sim" },
+            { question: "Um “heelflip” é quando o skate gira no eixo horizontal enquanto o skatista permanece em cima?", answer: "Sim" }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const quizDiv = document.getElementById("quiz");
+        const resultDiv = document.getElementById("result");
+
+        function showQuestion() {
+            if(currentQuestion < quizData.length){
+                quizDiv.innerHTML = `
+                    <div class="question">${quizData[currentQuestion].question}</div>
+                    <button onclick="checkAnswer('Sim')">Sim</button>
+                    <button onclick="checkAnswer('Não')">Não</button>
+                `;
+            } else {
+                quizDiv.innerHTML = "";
+                resultDiv.innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+            }
+        }
+
+        function checkAnswer(answer){
+            if(answer === quizData[currentQuestion].answer){
+                score++;
+            }
+            currentQuestion++;
+            showQuestion();
+        }
+
+        showQuestion();
+    </script>
+</body>
+</html>
